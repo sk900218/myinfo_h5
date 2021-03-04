@@ -109,7 +109,10 @@
 						<div><input type="password" class="text" id="password" value="123456" placeholder="请输入密码"/></div>
 						<div class="nickname">昵称</div>
 						<div class="nickname"><input type="text" class="text" id="nickname" placeholder="请输入昵称"/></div>
-						<div><button class="btn" id="login">登录</button></div>
+						<div>
+							<button class="btn" id="login" onclick="login()">登录</button>
+							<button class="btn" style="display:none;" onclick="register()" id="register">注册</button>
+						</div>
 						<div><button class="btn" id="loginRegisterSwitch" status="1">进行注册</button></div>
 						<div>为了便于后续功能演示，请先进行登录！<br/><span style="color: #55BF3B;">我已经为您创建好了账号，您也可以自行注册！</span></div>
 					</div>

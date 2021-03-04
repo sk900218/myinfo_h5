@@ -7,9 +7,11 @@ document.write("<link href=\"css\/common\/style.css\" rel=\"stylesheet\"\/>");
 
 /* 公共js */
 document.write("<script type=\"application\/javascript\" src=\"plugin\/jquery-3.5.1.min.js\"><\/script>");
-document.write("<script type=\"application\/javascript\" src=\"plugin\/layer\/layer.js\"><\/script>");
+document.write("<script type=\"application\/javascript\" src=\"plugin\/layer\/mobile\/layer.js\"><\/script>");
 document.write("<script type=\"application\/javascript\" src=\"plugin\/highcharts\/highcharts.js\"><\/script>");
 document.write("<script type=\"application\/javascript\" src=\"plugin\/highcharts\/highcharts-more.js\"><\/script>");
 //公共函数
 document.write("<script type=\"application\/javascript\" src=\"js\/common\/consts.js\"><\/script>");
 document.write("<script type=\"application\/javascript\" src=\"js\/common\/public.js\"><\/script>");
+document.write("<script type=\"application\/javascript\" src=\"js\/common\/cache.js\"><\/script>");
+document.write("<script type=\"application\/javascript\" src=\"js\/common\/api_proxy.js\"><\/script>");

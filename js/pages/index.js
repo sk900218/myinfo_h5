@@ -22,7 +22,17 @@ $(function(){
 			} else if(i == 5) {
 				page6Pop();
 			}
-		}
+		},
+		//横向滚动
+		afterSlideLoad: function(anchorLink, index, slideAnchor, slideIndex) {
+			var page = anchorLink.index;
+			var slide = slideAnchor.index;
+			if(page == 3 && slide != 0) {
+				/* 第三页，并且不是登录注册页 */
+				//验证登录
+				loginValid();
+			}
+		},
     });
 	
 	bind();
@@ -56,7 +66,8 @@ function loginRegisterSwitch(obj) {
 		//登录状态，切换成注册状态
 		$(".page4").find(".nickname").show();
 		$(obj).html("前往登录");
-		$("#login").html("注册");
+		$("#login").hide();
+		$("#register").show();
 		$(obj).attr("status", "2");
 		$("#account").val("");
 		$("#password").val("");
@@ -65,7 +76,8 @@ function loginRegisterSwitch(obj) {
 		//注册状态，切换成登录状态
 		$(".page4").find(".nickname").hide();
 		$(obj).html("前往注册");
-		$("#login").html("登录");
+		$("#login").show();
+		$("#register").hide();
 		$(obj).attr("status", "1");
 		$("#account").val("admin");
 		$("#password").val("123456");
@@ -320,3 +332,72 @@ function page24Charts() {
 		}]
 	});
 }
+
+
+/* 接口逻辑 start */
+//登录
+function login() {
+	var account = $("#account").val();
+	var password = $("#password").val();
+	var index = layer.open({type: 2});
+	apiProxy.apis.login(account, password, function(data) {
+		layer.close(index);
+		if(apiProxy.utils.isSuccess(data)) {
+			//成功
+			layer.open({
+				content: '欢迎你，' + cache.user.getUserInfo().nickname + '！',
+				btn: '确定',
+				end: function() {
+					$.fn.fullpage.moveSlideRight();
+				}
+			});
+		} else {
+			//失败
+			layer.open({
+				content: data.message,
+				btn: '确定'
+			});
+		}
+	});
+}
+//注册
+function register() {
+	var account = $("#account").val();
+	var password = $("#password").val();
+	var nickname = $("#nickname").val();
+	var index = layer.open({type: 2});
+	apiProxy.apis.register(account, password, nickname, function(data) {
+		layer.close(index);
+		if(apiProxy.utils.isSuccess(data)) {
+			//成功
+			layer.open({
+				content: '注册成功，赶紧去登录吧！',
+				btn: '确定',
+				end: function() {
+					loginRegisterSwitch($("#loginRegisterSwitch"));
+					$("#account").val("");
+					$("#password").val("");
+				}
+			});
+		} else {
+			//失败
+			layer.open({
+				content: data.message,
+				btn: '确定'
+			});
+		}
+	});
+}
+//验证登录
+function loginValid() {
+	apiProxy.apis.loginValid(function(data) {
+		if(!apiProxy.utils.isSuccess(data)) {
+			$.fn.fullpage.silentMoveTo(4,0);
+			layer.open({
+				content: '登录已失效，请重新登录！',
+				btn: '确定'
+			});
+		}
+	});
+}
+/* 接口逻辑 end */
