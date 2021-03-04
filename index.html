@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>盛凯的个人信息</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+		<link rel="stylesheet" href="css/style.css"/>
+		<!-- 公共引入 -->
+		<script src="js/common/include.js" type="application/javascript"></script>
+		<script src="plugin/fullPage/fullpage.min.js" type="application/javascript"></script>
+		<!-- 私有 -->
+		<link href="css/pages/index.css" rel="stylesheet"/>
+		<script src="js/pages/index.js" type="application/javascript" ></script>
+		<style type="text/css">
+			.fp-prev,.fp-next {
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="fullPage">
+		  <div class="section">
+			<div class="page1">
+				<div><span>尊敬的面试官，您好！</span></div>
+				<div><span>我叫 <b class='page1-name'>盛凯</b></span></div>
+				<div><span>即将被您面试，我感到十分荣幸</span></div>
+				<div><span>在此之前</span></div>
+				<div><span>请允许我借助H5，简单展示自己</span></div>
+				<div class="down"><img src="img/down.png" onclick="toPage(2)" id="page1Down"/></div>
+			</div>
+		  </div>
+		  <div class="section">
+			  <div class="slide">
+				<div id="page21Container" style="width: 100%; height: 95%;"></div>
+			  </div>
+			  <div class="slide">
+				<div id="page22Container" style="width: 100%; height: 95%;"></div>
+			  </div>
+			  <div class="slide">
+				<div id="page23Container" style="width: 100%; height: 95%;"></div>
+			  </div>
+			  <div class="slide">
+				  <div class="page24">
+					<div id="page24Container" style="width: 100%; height: 50%;"></div>
+					<div class="info">
+						<div><span>技术能力：</span>9年Web研发经验，可进行全栈式研发。</div>
+						<div><span>执行力：</span>严格执行上级下发的任务，适当时提出自己的见解。</div>
+						<div><span>人品：</span>人品保障，三观正。</div>
+						<div><span>亲和力：</span>能够与同事处理好关系。</div>
+						<div><span>管理能力：</span>曾担任开发组长一职。</div>
+						<div><span>学习力：</span>对待未知的事物保持强烈的学习欲望。</div>
+						<div><span>适应能力：</span>能尽快适应新环境，全身心融入工作中。</div>
+					</div>
+				  </div>
+			  </div>
+		  </div>
+		  <div class="section">
+			<div class="slide">
+				<div class="page3">
+					<div class="title">
+						<i class="page-left"></i>
+						<div>本项目整体架构</div>
+						<i class="page-right"></i>
+					</div>
+					<div><img src="img/page3.png"/></div>
+					<div>如果您对我的项目感兴趣，欢迎查阅后端源码</div>
+					<div>本项目开源</div>
+					<div><a href="http://github.com/sk900218/myinfo" target="_blank">http://github.com/sk900218/myinfo</a></div>
+				</div>
+			</div>
+			<div class="slide">
+				<div class="page3">
+					<div class="title">
+						<i class="page-left"></i>
+						<div>后端项目结构图</div>
+						<i class="page-right"></i>
+					</div>
+					<div><img src="img/page32.png"/></div>
+					<div>后端以接口形式向前端输出能力，前后分离</div>
+					<div><span>采用框架</span><br/>SpringCloud + SpringBoot<br/>MyBatis + Jpa + Quartz + Swagger</div>
+					<div>其他：MySql、Redis、ActiveMQ、Nginx</div>
+				</div>
+			</div>
+			<div class="slide">
+				<div class="page3">
+					<div class="title">
+						<i class="page-left"></i>
+						<div>前端项目结构图</div>
+						<i class="page-right"></i>
+					</div>
+					<div><img src="img/page33.png"/></div>
+					<div>前端采用H5+CSS3，结合插件以实现最终效果</div>
+					<div><span>采用插件</span><br/>Jquery + fullPage + highcharts + layer</div>
+				</div>
+			</div>
+		  </div>
+		  <div class="section">
+			<div class="slide">
+				<div class="page4">
+					<div class="title">
+						<i class="page-left"></i>
+						<div>用户服务展示</div>
+						<i class="page-right"></i>
+					</div>
+					<div class="user">
+						<div>账号</div>
+						<div><input type="text" class="text" id="account" value="admin" placeholder="请输入账号"/></div>
+						<div>密码</div>
+						<div><input type="password" class="text" id="password" value="123456" placeholder="请输入密码"/></div>
+						<div class="nickname">昵称</div>
+						<div class="nickname"><input type="text" class="text" id="nickname" placeholder="请输入昵称"/></div>
+						<div><button class="btn" id="login">登录</button></div>
+						<div><button class="btn" id="loginRegisterSwitch" status="1">进行注册</button></div>
+						<div>为了便于后续功能演示，请先进行登录！<br/><span style="color: #55BF3B;">我已经为您创建好了账号，您也可以自行注册！</span></div>
+					</div>
+				</div>
+			</div>
+			<div class="slide">
+				<div class="page4">
+					<div class="title">
+						<i class="page-left"></i>
+						<div>管理服务展示</div>
+						<i class="page-right"></i>
+					</div>
+					<div class="manager">
+						<div class="funs">
+							<input type="text" class="text" placeholder="输入书籍名称"/>
+							<button class="btn">查询图书</button>
+							<button class="btn">增加图书</button>
+						</div>
+						<div class="body">
+							<div class="box">
+								<div class="tr-title" style="font-weight: bold;">
+									<div>录入时间</div>
+									<div>书名</div>
+									<div>操作</div>
+								</div>
+								<div class="tr-content">
+									<div class="tr">
+										<div>2021-03-02 20:55:22</div>
+										<div>Java入门基础</div>
+										<div>
+											<a>记录</a>
+											<a>修改</a>
+											<a>删除</a>
+										</div>
+									</div>
+									<div class="tr">
+										<div>2021-03-02 20:55:22</div>
+										<div>Java入门基础</div>
+										<div>
+											<a>记录</a>
+											<a>修改</a>
+											<a>删除</a>
+										</div>
+									</div>
+									<div class="tr">
+										<div>2021-03-02 20:55:22</div>
+										<div>Java入门基础</div>
+										<div>
+											<a>记录</a>
+											<a>修改</a>
+											<a>删除</a>
+										</div>
+									</div>
+									<div class="tr">
+										<div>2021-03-02 20:55:22</div>
+										<div>Java入门基础</div>
+										<div>
+											<a>记录</a>
+											<a>修改</a>
+											<a>删除</a>
+										</div>
+									</div>
+									<div class="tr">
+										<div>2021-03-02 20:55:22</div>
+										<div>Java入门基础</div>
+										<div>
+											<a>记录</a>
+											<a>修改</a>
+											<a>删除</a>
+										</div>
+									</div>
+									<div class="tr">
+										<div>2021-03-02 20:55:22</div>
+										<div>Java入门基础啊实打实大所大声道啊实打实打算</div>
+										<div>
+											<a>记录</a>
+											<a>修改</a>
+											<a>删除</a>
+										</div>
+									</div>
+									<div class="tr">
+										<div>2021-03-02 20:55:22</div>
+										<div>Java入门基础</div>
+										<div>
+											<a>记录</a>
+											<a>修改</a>
+											<a>删除</a>
+										</div>
+									</div>
+									<div class="tr">
+										<div>2021-03-02 20:55:22</div>
+										<div>Java入门基础</div>
+										<div>
+											<a>记录</a>
+											<a>修改</a>
+											<a>删除</a>
+										</div>
+									</div>
+									<div class="tr">
+										<div>2021-03-02 20:55:22</div>
+										<div>Java入门基础</div>
+										<div>
+											<a>记录</a>
+											<a>修改</a>
+											<a>删除</a>
+										</div>
+									</div>
+									<div class="tr">
+										<div>2021-03-02 20:55:22</div>
+										<div>Java入门基础</div>
+										<div>
+											<a>记录</a>
+											<a>修改</a>
+											<a>删除</a>
+										</div>
+									</div>
+								</div>
+								<div class="tr-bottom">
+									<a>上一页</a>
+									<span>第<span>1</span>页&nbsp;共<span>2</span>页</span>
+									<a>下一页</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="slide">
+				<div class="page4">
+					<div class="title">
+						<i class="page-left"></i>
+						<div>前端服务展示</div>
+						<i class="page-right"></i>
+					</div>
+					<div class="apply">
+						<div>借：</div>
+						<div class="get">
+							借取<span><input type="text" class="text" value="1" style="width:3rem; text-align: center;"/></span>本书
+							<button class="btn">借取</button>
+						</div>
+						<div style="margin-top: 1.6rem;">还：</div>
+						<div class="put"><button class="btn">随便归还一本书</button></div>
+					</div>
+				</div>
+			</div>
+		  </div>
+		
+		  <div class="section">
+			<div class="page5">
+				<div class="title">
+					<div>往期项目展示</div>
+				</div>
+			</div>
+		  </div>
+		  
+		  <div class="section">
+		  	<div class="page6">
+				<div><span>非常感谢您能看到此处</span></div>
+				<div><span>本人很期待接下来的面试</span></div>
+				<div><span>若能有幸共事，还请多多指教</span></div>
+				<div><span>谢谢！</span></div>
+		  	</div>
+		  </div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,14 @@
+html, body {
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+}
+a {
+	text-decoration: none !important;
+}
+ul {
+	list-style-type: none;
+}
+input {
+	outline: none;
+}

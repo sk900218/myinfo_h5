@@ -1,0 +1,328 @@
+body {
+	color: #616161;
+}
+.down {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-end;
+	z-index: 2;
+}
+.down img {
+	margin: 0px auto;
+	opacity: 0.6;
+	margin-bottom: 1.4rem;
+	display:none;
+	width: 4rem;
+}
+.title {
+	width: 100%;
+	margin: 1rem 0rem;
+	text-align: center !important;
+	font-size: 1.2rem;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.page-left:before {
+	content: "◄";
+	font-family: "arial narrow";
+	font-size: 1.6rem;
+	padding-left: 0.6rem;
+	font-style: normal;
+	color: #999999;
+}
+.page-right:after {
+	content: "►";
+	font-family: "arial narrow";
+	font-size: 1.6rem;
+	padding-right: 0.6rem;
+	font-style: normal;
+	color: #999999;
+}
+
+/* 组件控制 start */
+.highcharts-axis-line {
+	stroke: none;
+}
+/* 组件控制 end */
+
+/* 表单组件 start */
+.text {
+	width: 100%;
+	border: 1px solid #000000;
+	padding: 0.4rem;
+	box-sizing: border-box;
+	font-size: 1rem;
+}
+.btn {
+	width: 100%;
+	font-size: 1rem;
+	text-align: center;
+	padding: 0.6rem;
+	border: 1px solid #000000;
+	color: #616161;
+	outline: none;
+}
+/* 表单组件 end */
+
+/* page1 start */
+.page1 {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.page1 div span {
+	display: none;
+}
+.page1 div {
+	font-size: 1.2rem;
+	margin: 0.4rem 0rem;
+}
+.page1 div:nth-child(1) {
+	font-size: 1.6rem;
+}
+.page1 div:nth-child(2) {
+	font-size: 1.4rem;
+}
+.page1-name {
+	font-weight: bold;
+}
+/* page1 end */
+
+/* page2 start */
+.page24 {
+	height: 95%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+}
+.page24 .info {
+	padding: 0.4rem;
+	font-size: 0.8rem;
+}
+.page24 .info div {
+	margin-bottom: 0.2rem;
+}
+.page24 .info span {
+	font-weight: bold;
+}
+/* page2 end */
+
+/* page3 start */
+.page3 {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-start;
+	text-align: center;
+}
+.page3 div {
+	width: 100%;
+}
+.page3 div:nth-child(2) {
+	width: 100%;
+	text-align: center;
+}
+.page3 div:nth-child(2) img {
+	height: 30rem;
+	max-width: 100%;
+}
+.page3 div:nth-child(3) {
+	margin-top: 1rem;
+	width: 100%;
+}
+/* page3 end */
+
+/* page4 start */
+.page4 {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: flex-start;
+	text-align: center;
+}
+.page4 .user {
+	width: 100%;
+}
+.page4 .user div {
+	width: 100%;
+	text-align: left;
+	padding: 0.2rem 1rem;
+	box-sizing: border-box;
+}
+.page4 .user div:nth-child(3) {
+	margin-top: 0.2rem;
+}
+.page4 .user div:nth-child(5) {
+	margin-top: 0.2rem;
+}
+.page4 .user div:nth-child(7) {
+	margin-top: 0.6rem;
+}
+.page4 .user div:nth-child(8) {
+	margin-top: 0.2rem;
+}
+.page4 .user .nickname {
+	display: none;
+}
+
+.page4 .manager {
+	width: 100%;
+}
+.page4 .manager .funs {
+	width: 100%;
+	display: flex;
+	flex-direction: rows;
+	align-items: flex-start;
+	justify-content: flex-start;
+	text-align: left;
+	padding: 0.2rem 1rem;
+	box-sizing: border-box;
+}
+.page4 .manager .funs * {
+	margin-right: 0.4rem;
+}
+.page4 .manager .funs input {
+	width: 40%;
+	height: 2rem;
+}
+.page4 .manager .funs button {
+	width: auto;
+	padding: 0rem 0.4rem;
+	height: 2rem;
+}
+.page4 .manager .body {
+	width: 100%;
+	padding: 1rem;
+	box-sizing: border-box;
+}
+.page4 .manager .body .box {
+	width: 100%;
+	height: 20rem;
+	font-size: 0.7rem;
+	padding: 0.2rem;
+	box-sizing: border-box;
+}
+.page4 .manager .body .box div {
+	margin-bottom: 0.2rem;
+}
+.page4 .manager .body .box .tr-title {
+	display: flex;
+	flex-direction: rows;
+	align-items: center;
+	justify-content: space-around;
+	font-weight: bold;
+	border-bottom: 1px solid #888888;
+}
+.page4 .manager .body .box .tr-content {
+	width: 100%;
+}
+.page4 .manager .body .box .tr-content .tr {
+	display: flex;
+	flex-direction: rows;
+	align-items: center;
+	justify-content: space-around;
+	text-align: center;
+	border-bottom: 1px dashed #CCCCCC;
+}
+.page4 .manager .body .box .tr-title div:first-child {
+	width: 8rem;
+	flex-shrink: 0;
+}
+.page4 .manager .body .box .tr-title div:nth-child(2) {
+	width: 4.6rem;
+}
+.page4 .manager .body .box .tr-title div:last-child {
+	width: 5.4rem;
+	flex-shrink: 0;
+}
+.page4 .manager .body .box .tr-content .tr div:first-child {
+	width: 8rem;
+	flex-shrink: 0;
+}
+.page4 .manager .body .box .tr-content .tr div:nth-child(2) {
+	width: 4.6rem;
+}
+.page4 .manager .body .box .tr-content .tr div:last-child {
+	width: 5.4rem;
+	flex-shrink: 0;
+}
+.page4 .manager .body .box .tr-bottom {
+	font-size: 0.9rem;
+}
+
+.page4 .apply {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	padding: 0.4rem;
+	box-sizing: border-box;
+}
+.page4 .apply .get {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.4rem;
+}
+.page4 .apply div {
+	width: 100%;
+	text-align: left;
+	font-size: 1.4rem;
+}
+.page4 .apply .get span {
+	margin: 0px 0.6rem;
+}
+.page4 .apply .get button {
+	width: 30%;
+	margin-left: 2rem;
+}
+.page4 .apply .put {
+	width: 100%;
+	text-align: center;
+}
+.page4 .apply .put button {
+	width: 80%;
+}
+/* page4 end */
+
+
+/* page6 start */
+.page6 {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.page6 {
+	width: 100%;
+	height: 100%;
+}
+.page6 div span {
+	display: none;
+}
+.page6 div {
+	font-size: 1.6rem;
+	margin: 0.4rem 0rem;
+}
+/* page6 end */
