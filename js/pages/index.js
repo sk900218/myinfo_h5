@@ -30,7 +30,13 @@ $(function(){
 			if(page == 3 && slide != 0) {
 				/* 第三页，并且不是登录注册页 */
 				//验证登录
-				loginValid();
+				loginValid(function() {
+					//验证通过
+					if(page == 3 && slide == 1) {
+						//列表页,初始化
+						queryBookList(1);
+					}
+				});
 			}
 		},
     });
@@ -51,6 +57,28 @@ function bind() {
 	});
 	$(".page-right").on("click", function() {
 		$.fn.fullpage.moveSlideRight();
+	});
+	
+	/* 图书列表 */
+	$("#queryBook").on("click", function() {
+		queryBookList();
+	});
+	$("#bookPrev").on("click", function() {
+		var page = $("#page").html();
+		if(!!page) {
+			queryBookList(parseInt(page) - 1);
+		}
+	});
+	$("#bookNext").on("click", function() {
+		var page = $("#page").html();
+		if(!!page) {
+			queryBookList(parseInt(page) + 1);
+		}
+	});
+	
+	/* 添加图书 */
+	$("#addBook").on("click", function() {
+		showAddBook();
 	});
 }
 
@@ -340,7 +368,7 @@ function login() {
 	var account = $("#account").val();
 	var password = $("#password").val();
 	var index = layer.open({type: 2});
-	apiProxy.apis.login(account, password, function(data) {
+	apiProxy.apis.user.login(account, password, function(data) {
 		layer.close(index);
 		if(apiProxy.utils.isSuccess(data)) {
 			//成功
@@ -366,7 +394,7 @@ function register() {
 	var password = $("#password").val();
 	var nickname = $("#nickname").val();
 	var index = layer.open({type: 2});
-	apiProxy.apis.register(account, password, nickname, function(data) {
+	apiProxy.apis.user.register(account, password, nickname, function(data) {
 		layer.close(index);
 		if(apiProxy.utils.isSuccess(data)) {
 			//成功
@@ -389,15 +417,218 @@ function register() {
 	});
 }
 //验证登录
-function loginValid() {
-	apiProxy.apis.loginValid(function(data) {
+function loginValid(collback) {
+	apiProxy.apis.user.loginValid(function(data) {
 		if(!apiProxy.utils.isSuccess(data)) {
 			$.fn.fullpage.silentMoveTo(4,0);
 			layer.open({
 				content: '登录已失效，请重新登录！',
 				btn: '确定'
 			});
+		} else {
+			collback();
 		}
+	});
+}
+
+//图书列表查询
+var queryBookRows = 10; //默认最大页数
+function queryBookList(page) {
+	if(!page) {
+		//为空设置默认值
+		page = $("#page").html();
+		if(!!page) {
+			page = parseInt(page);
+		}
+	}
+	
+	var maxPage = $("#maxPage").html();
+	if(!!maxPage) {
+		//非初始化
+		if(page < 1 || page > parseInt(maxPage)) {
+			return;
+		}
+	}
+	
+	var index = layer.open({type: 2});
+	var bookName = $("#queryBookName").val();
+	var row = queryBookRows;
+	apiProxy.apis.manager.queryBookList(bookName, page, queryBookRows, function(data) {
+		if(apiProxy.utils.isSuccess(data)) {
+			//列表填充
+			setBookList(data.data);
+		} else {
+			layer.open({
+				content: data.message,
+				btn: "确定"
+			});
+		}
+		layer.close(index);
+	});
+}
+//设置图书
+function setBookList(data) {
+	$(".tr-content").html("");
+	for(var i=0; i<data.data.length; i++) {
+		var obj = data.data[i];
+		var html="";
+		html += "<div class=\"tr\">";
+		html += "	<div>" + obj.createTime + "<\/div>";
+		html += "	<div>" + obj.name + "<\/div>";
+		html += "	<div>";
+		html += "		<a href='javascript:;' onclick='showBookBorrow(\""+obj.id+"\")'>记录<\/a>";
+		html += "		<a href='javascript:;' onclick='showUpdateBook(\""+obj.id+"\")'>修改<\/a>";
+		html += "		<a href='javascript:;' onclick='deleteBook(\""+obj.id+"\", \""+obj.name+"\")'>删除<\/a>";
+		html += "	<\/div>";
+		html += "<\/div>";
+		$(".tr-content").append(html);
+	}
+	//设置页数
+	$("#page").html(data.page);
+	$("#maxPage").html(data.maxPage);
+}
+
+//添加图书
+function showAddBook() {
+	layer.open({
+		title: [
+		  '添加图书',
+		  'background-color: #FF4351; color:#fff;'
+		],
+		content: "<div>录入书名</div><div><input type='text' style='text-align:center;' id='addBookName' class='text' /></div>",
+		btn: ['保存', '取消'],
+		yes: function() {
+			var bookName = $("#addBookName").val();
+			var index = layer.open({type: 2});
+			apiProxy.apis.manager.saveBook(bookName, function(data) {
+				if(apiProxy.utils.isSuccess(data)) {
+					layer.open({
+						content: "保存成功！",
+						btn: "确定",
+						end: function() {
+							queryBookList();
+						}
+					});
+				} else {
+					layer.open({
+						content: data.message,
+						btn: "确定"
+					});
+				}
+				layer.close(index);
+			});
+		}
+	});
+}
+
+//修改图书
+function showUpdateBook(id) {
+	//查询图书
+	var queryIndex = layer.open({type: 2});
+	apiProxy.apis.manager.queryBook(id, function(book) {
+		layer.close(queryIndex);
+		if(apiProxy.utils.isSuccess(book)) {
+			layer.open({
+				title: [
+				  '更新图书',
+				  'background-color: #FF4351; color:#fff;'
+				],
+				content: "<div>录入书名</div><div><input type='text' style='text-align:center;' id='updateBookName' value='"+book.data.name+"' class='text' /></div>",
+				btn: ['更新', '取消'],
+				yes: function() {
+					var bookName = $("#updateBookName").val();
+					var index = layer.open({type: 2});
+					apiProxy.apis.manager.updateBook(id, bookName, function(data) {
+						if(apiProxy.utils.isSuccess(data)) {
+							layer.open({
+								content: "更新成功！",
+								btn: "确定",
+								end: function() {
+									queryBookList();
+								}
+							});
+						} else {
+							layer.open({
+								content: data.message,
+								btn: "确定"
+							});
+						}
+						layer.close(index);
+					});
+				}
+			});
+		} else {
+			layer.open({
+				content: book.message,
+				btn: "确定"
+			});
+		}
+	});
+}
+
+//删除图书
+function deleteBook(id, name) {
+	layer.open({
+		content: '确定要删除['+name+']吗？',
+		btn: ["确定", "取消"],
+		yes: function() {
+			var index = layer.open({type: 2});
+			apiProxy.apis.manager.deleteBook(id, function(data) {
+				if(apiProxy.utils.isSuccess(data)) {
+					layer.open({
+						content: "删除成功！",
+						btn: "确定",
+						end: function() {
+							queryBookList();
+						}
+					});
+				} else {
+					layer.open({
+						content: data.message,
+						btn: "确定"
+					});
+				}
+				layer.close(index);
+			});
+		}
+	});
+}
+
+//打开借阅记录
+function showBookBorrow(bookId) {
+	var page = 1;
+	var rows = 1000; //默认给最大的数
+	var index = layer.open({type: 2});
+	apiProxy.apis.manager.queryBookBorrowList(bookId, page, rows, function(data) {
+		if(apiProxy.utils.isSuccess(data)) {
+			//展示
+			var style = "display: flex; flex-direction: column; align-items: center; justify-content: center;";
+			var html = "<div style='"+style+"'>";
+			for(var i=0; i<data.data.data.length; i++) {
+				var obj = data.data.data[i];
+				var tempStyle = "display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; border-bottom: 1px dashed #CCCCCC; margin-bottom: 0.4rem;"
+				html += "<div style='"+tempStyle+"'>";
+				html += "<div>借阅人：" + obj.userName + "</div>"; //借阅人
+				html += "<div>借阅时间：" + obj.createTime + "</div>"; //创建时间
+				html += "<div>归还时间：" + (!!obj.returnTime?obj.returnTime:"暂未归还") + "</div>"; //归还时间
+				html += "</div>"
+			}
+			html += "</div>"
+			layer.open({
+				title: [
+				  '借阅列表',
+				  'background-color: #FF4351; color:#fff;'
+				],
+				content: html,
+				btn: ["确定"],
+			});
+		} else {
+			layer.open({
+				content: data.message,
+				btn: "确定"
+			});
+		}
+		layer.close(index);
 	});
 }
 /* 接口逻辑 end */
