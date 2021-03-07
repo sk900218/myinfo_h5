@@ -7,7 +7,7 @@ $(function(){
 			if(i == 0) {
 				page1Push();
 			} else if(i == 1) {
-				page2Push();
+				page2Push(0);
 			} else if(i == 5) {
 				page6Push();
 			}
@@ -17,8 +17,6 @@ $(function(){
 			var i = index.index;
 			if(i == 0) {
 				page1Pop();
-			} else if(i == 1) {
-				page2Pop();
 			} else if(i == 5) {
 				page6Pop();
 			}
@@ -27,8 +25,11 @@ $(function(){
 		afterSlideLoad: function(anchorLink, index, slideAnchor, slideIndex) {
 			var page = anchorLink.index;
 			var slide = slideAnchor.index;
-			if(page == 3 && slide != 0) {
-				/* 第三页，并且不是登录注册页 */
+			if(page == 1) {
+				//第二页
+				page2Push(slide);
+			} else if(page == 3 && slide != 0) {
+				/* 第死页，并且不是登录注册页 */
 				//验证登录
 				loginValid(function() {
 					//验证通过
@@ -79,6 +80,20 @@ function bind() {
 	/* 添加图书 */
 	$("#addBook").on("click", function() {
 		showAddBook();
+	});
+	
+	/* page5图片集，阻止冒泡 */
+	$(".page5").find(".imgs").on("touchmove", function(event) {
+		event.stopPropagation();
+	});
+	
+	/* 随机借阅图书 */
+	$("#getBtn").on("click", function() {
+		applyRandomBorrow();
+	});
+	/* 随机归还书籍 */
+	$("#putBtn").on("click", function() {
+		applyRandomReturn();
 	});
 }
 
@@ -134,11 +149,16 @@ function page1Pop() {
 }
 
 //页面2
-function page2Push() {
-	page21Charts();
-	page22Charts();
-	page23Charts();
-	page24Charts();
+function page2Push(index) {
+	if(index == 0) {
+		page21Charts();
+	} else if(index == 1) {
+		page22Charts();
+	} else if(index == 2) {
+		page23Charts();
+	} else if(index == 3) {
+		page24Charts();
+	}
 }
 function page2Pop() {
 	
@@ -203,7 +223,7 @@ function page21Charts() {
 			enabled: false
 		},
 		series: [{
-			data: [3.5,4,3,3,3,3,3.5,3.5,2.5,4,2.5,3.5]
+			data: [4,4,3,3,3,3,3.5,3.5,2.5,4,2.5,3.5]
 		}]
 	});
 }
@@ -329,7 +349,7 @@ function page24Charts() {
 			}
 		},
 		pane: {
-			size: '70%'
+			size: '90%'
 		},
 		xAxis: {
 			categories: ['技术能力', '执行力', '人品', '亲和力',
@@ -373,7 +393,7 @@ function login() {
 		if(apiProxy.utils.isSuccess(data)) {
 			//成功
 			layer.open({
-				content: '欢迎你，' + cache.user.getUserInfo().nickname + '！',
+				content: '欢迎您，' + cache.user.getUserInfo().nickname + '！',
 				btn: '确定',
 				end: function() {
 					$.fn.fullpage.moveSlideRight();
@@ -475,6 +495,7 @@ function setBookList(data) {
 		html += "<div class=\"tr\">";
 		html += "	<div>" + obj.createTime + "<\/div>";
 		html += "	<div>" + obj.name + "<\/div>";
+		html += "	<div>" + (obj.borrowStatus==1?"已借":"未借") + "<\/div>";
 		html += "	<div>";
 		html += "		<a href='javascript:;' onclick='showBookBorrow(\""+obj.id+"\")'>记录<\/a>";
 		html += "		<a href='javascript:;' onclick='showUpdateBook(\""+obj.id+"\")'>修改<\/a>";
@@ -597,21 +618,26 @@ function deleteBook(id, name) {
 //打开借阅记录
 function showBookBorrow(bookId) {
 	var page = 1;
-	var rows = 1000; //默认给最大的数
+	var rows = 1000; //默认加载最大条数
 	var index = layer.open({type: 2});
 	apiProxy.apis.manager.queryBookBorrowList(bookId, page, rows, function(data) {
 		if(apiProxy.utils.isSuccess(data)) {
 			//展示
-			var style = "display: flex; flex-direction: column; align-items: center; justify-content: center;";
-			var html = "<div style='"+style+"'>";
-			for(var i=0; i<data.data.data.length; i++) {
-				var obj = data.data.data[i];
-				var tempStyle = "display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; border-bottom: 1px dashed #CCCCCC; margin-bottom: 0.4rem;"
-				html += "<div style='"+tempStyle+"'>";
-				html += "<div>借阅人：" + obj.userName + "</div>"; //借阅人
-				html += "<div>借阅时间：" + obj.createTime + "</div>"; //创建时间
-				html += "<div>归还时间：" + (!!obj.returnTime?obj.returnTime:"暂未归还") + "</div>"; //归还时间
-				html += "</div>"
+			var style = "display: flex; flex-direction: column; align-items: center; justify-content: flex-start; height: 15rem; overflow-y: auto;";
+			var html = "<div id='borrowList' style='"+style+"'>";
+			if(data.data.data.length == 0) {
+				var tempStyle = "width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;";
+				html += "<div style='"+tempStyle+"'>暂时无人借阅</div>";
+			} else {
+				for(var i=0; i<data.data.data.length; i++) {
+					var obj = data.data.data[i];
+					var tempStyle = "display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; border-bottom: 1px dashed #CCCCCC; margin-bottom: 0.4rem;";
+					html += "<div style='"+tempStyle+"'>";
+					html += "<div>借阅人：" + obj.userName + "</div>"; //借阅人
+					html += "<div>借阅时间：" + obj.createTime + "</div>"; //创建时间
+					html += "<div>归还时间：" + (!!obj.returnTime?obj.returnTime:"暂未归还") + "</div>"; //归还时间
+					html += "</div>"
+				}
 			}
 			html += "</div>"
 			layer.open({
@@ -622,11 +648,70 @@ function showBookBorrow(bookId) {
 				content: html,
 				btn: ["确定"],
 			});
+			//阻止冒泡
+			$("#borrowList").off("touchmove").on("touchmove", function(event) {
+				event.stopPropagation();
+			});
 		} else {
 			layer.open({
 				content: data.message,
 				btn: "确定"
 			});
+		}
+		layer.close(index);
+	});
+}
+
+
+//随机借阅书籍
+function applyRandomBorrow() {
+	//截胡
+	var cut = 0;
+	if($("#getJh").prop("checked")) {
+		cut = 1;
+	}
+	//数量
+	var num = $("#getNum").val();
+	if(isNaN(num)) {
+		layer.open({
+			content: '请输入数字',
+			btn: '确定',
+			end: function() {
+				$("#getNum").focus();
+			}
+		});
+		return;
+	}
+	num = parseInt(num);
+	//调用接口
+	$("#getMsg").html("");
+	var index = layer.open({type: 2});
+	apiProxy.apis.apply.randomBorrow(num, cut, function(data) {
+		if(apiProxy.utils.isSuccess(data)) {
+			data = data.data;
+			var msg = "你成功借阅了<br/>[";
+			var arr = new Array();
+			for(var i=0; i<data.length; i++) {
+				arr.push(data[i].name);
+			}
+			msg += arr.join("、");
+			msg += "]";			$("#getMsg").css("color", "green").html(msg);
+		} else {			$("#getMsg").css("color", "red").html(data.message);
+		}
+		layer.close(index);
+	});
+}
+//随机归还书籍
+function applyRandomReturn() {
+	//调用接口
+	$("#putMsg").html("");
+	var index = layer.open({type: 2});
+	apiProxy.apis.apply.randomReturn(function(data) {
+		if(apiProxy.utils.isSuccess(data)) {
+			data = data.data;
+			var msg = "你成功归还了[" + data.name + "]";
+			$("#putMsg").css("color", "green").html(msg);
+		} else {			$("#putMsg").css("color", "red").html(data.message);
 		}
 		layer.close(index);
 	});

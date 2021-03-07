@@ -33,6 +33,12 @@ var apiProxy = {
 		MANAGER_BOOK_DELETE: API_URL + 'manager/book',
 		//借阅记录
 		MANAGER_BOOK_BORROW_LIST: API_URL + 'manager/book/borrow/list',
+		
+		/* 应用端 */
+		//随机借阅书籍
+		APPLY_RANDOM_BORROW: API_URL + 'apply/book/random/borrow',
+		//随机归还书籍
+		APPLY_RANDOM_RETURN: API_URL + 'apply/book/random/return',
 	},
 	//工具集
 	utils: {
@@ -211,6 +217,36 @@ var apiProxy = {
 				apiProxy.utils.access(apiProxy.urls.MANAGER_BOOK_BORROW_LIST, "GET", params, function(data) {
 					/* 回调 */
 					collback(data);
+				});
+			},
+		},
+		//应用端
+		apply: {
+			/**
+			 * 随机借阅书籍
+			 * @param num 数量
+			 * @param cut 是否有几率截胡
+			 * @param collback
+			 */
+			randomBorrow: function(num, cut, collback) {
+				var params = {'num': num, 'cut': cut};
+				apiProxy.utils.access(apiProxy.urls.APPLY_RANDOM_BORROW, "POST", params, function(data) {
+					/* 回调 */
+					if(!!collback) {
+						collback(data);
+					}
+				});
+			},
+			/**
+			 * 随机归还书籍
+			 * @param collback
+			 */
+			randomReturn: function(collback) {
+				apiProxy.utils.access(apiProxy.urls.APPLY_RANDOM_RETURN, "POST", null, function(data) {
+					/* 回调 */
+					if(!!collback) {
+						collback(data);
+					}
 				});
 			},
 		}

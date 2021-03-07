@@ -63,9 +63,10 @@
 						<i class="page-right"></i>
 					</div>
 					<div><img src="img/page3.png"/></div>
-					<div>如果您对我的项目感兴趣，欢迎查阅后端源码</div>
+					<div>如果您对我的项目感兴趣，欢迎查阅源码</div>
 					<div>本项目开源</div>
-					<div><a href="http://github.com/sk900218/myinfo" target="_blank">http://github.com/sk900218/myinfo</a></div>
+					<div>后端：<a href="http://github.com/sk900218/myinfo" target="_blank">http://github.com/sk900218/myinfo</a></div>
+					<div>前端：<a href="http://github.com/sk900218/myinfo_h5" target="_blank">http://github.com/sk900218/myinfo_h5</a></div>
 				</div>
 			</div>
 			<div class="slide">
@@ -90,7 +91,7 @@
 					</div>
 					<div><img src="img/page33.png"/></div>
 					<div>前端采用H5+CSS3，结合插件以实现最终效果</div>
-					<div><span>采用插件</span><br/>Jquery + fullPage + highcharts + layer</div>
+					<div><span>采用插件</span><br/>Jquery + fullPage + highcharts + layer + swipeslider</div>
 				</div>
 			</div>
 		  </div>
@@ -125,6 +126,9 @@
 						<div>管理服务展示</div>
 						<i class="page-right"></i>
 					</div>
+					<div class="title-child">
+						<div>—— 使用JPA ——</div>
+					</div>
 					<div class="manager">
 						<div class="funs">
 							<input type="text" class="text" id="queryBookName" placeholder="输入书籍名称"/>
@@ -136,6 +140,7 @@
 								<div class="tr-title" style="font-weight: bold;">
 									<div>录入时间</div>
 									<div>书名</div>
+									<div>状态</div>
 									<div>操作</div>
 								</div>
 								<div class="tr-content">
@@ -157,14 +162,44 @@
 						<div>前端服务展示</div>
 						<i class="page-right"></i>
 					</div>
+					<div class="title-child">
+						<div>—— 使用MyBatis ——</div>
+					</div>
 					<div class="apply">
 						<div>借：</div>
-						<div class="get">
-							借取<span><input type="text" class="text" value="1" style="width:3rem; text-align: center;"/></span>本书
-							<button class="btn">借取</button>
+						<div class="get jh">
+							<input type="checkbox" id="getJh"/>
+							<div>有可能被人截胡（展示事务）</div>
 						</div>
+						<div class="get">
+							借取<span><input type="number" class="text" id="getNum" value="1" style="width:3rem; text-align: center;"/></span>本书
+							<button class="btn" id="getBtn">借取</button>
+						</div>
+						<div class="message" id="getMsg">&nbsp;</div>
 						<div style="margin-top: 1.6rem;">还：</div>
-						<div class="put"><button class="btn">随便归还一本书</button></div>
+						<div class="put"><button class="btn" id="putBtn">随便归还一本书</button></div>
+						<div class="message" id="putMsg">&nbsp;</div>
+					</div>
+				</div>
+			</div>
+			<div class="slide">
+				<div class="page4">
+					<div class="title">
+						<i class="page-left"></i>
+						<div>接口文档</div>
+						<i class="page-right"></i>
+					</div>
+					<div class="title-child">
+						<div>—— 使用Swagger ——</div>
+					</div>
+					<div class="swagger">
+						<div>用户相关服务</div>
+						<div><a href="http://skinfo.natapp1.cc/myinfo/user/swagger-ui.html" target="_blank">http://skinfo.natapp1.cc/myinfo/user/swagger-ui.html</a></div>
+						<div>管理端相关服务</div>
+						<div><a href="http://skinfo.natapp1.cc/myinfo/manager/swagger-ui.html" target="_blank">http://skinfo.natapp1.cc/myinfo/manager/swagger-ui.html</a></div>
+						<div>应用端相关服务</div>
+						<div><a href="http://skinfo.natapp1.cc/myinfo/apply/swagger-ui.html" target="_blank">http://skinfo.natapp1.cc/myinfo/apply/swagger-ui.html</a></div>
+						<div class="info">接口均采用restful风格开发。<br/>无论请求还是返回，均有详细解释，以确保联调的顺畅及后续研发的低成本。</div>
 					</div>
 				</div>
 			</div>
@@ -172,8 +207,201 @@
 		
 		  <div class="section">
 			<div class="page5">
-				<div class="title">
-					<div>往期项目展示</div>
+				<!-- MyTask -->
+				<div class="slide">
+					<div class="title">
+						<i class="page-left"></i>
+						<div>往期项目展示（1/7）</div>
+						<i class="page-right"></i>
+					</div>
+					<div class="title-child">
+						<div>—— MyTask ——</div>
+					</div>
+					<div class="imgs-parent">
+						<div class="imgs">
+							<img src="img/item/mytask/1.jpg"/>
+							<img src="img/item/mytask/2.jpg"/>
+							<img src="img/item/mytask/3.jpg"/>
+							<img src="img/item/mytask/4.jpg"/>
+							<img src="img/item/mytask/5.jpg"/>
+							<img src="img/item/mytask/6.jpg"/>
+							<img src="img/item/mytask/7.jpg"/>
+							<img src="img/item/mytask/8.jpg"/>
+							<img src="img/item/mytask/9.jpg"/>
+							<img src="img/item/mytask/10.jpg"/>
+							<img src="img/item/mytask/11.jpg"/>
+						</div>
+					</div>
+					<div class="content">
+						<div><span>简介：</span>众包任务平台，可分发任务、发展下线、赚取分润等。</div>
+						<div><span>职责：</span>后端项目搭建、研发、项目分析、规范制定。</div>
+						<div><span>状态：</span>已上线测试版。</div>
+						<div><span>查看方式：</span>微信小程序搜索MyTask。</div>
+					</div>
+				</div>
+				<!-- 熹萌 -->
+				<div class="slide">
+					<div class="title">
+						<i class="page-left"></i>
+						<div>往期项目展示（2/7）</div>
+						<i class="page-right"></i>
+					</div>
+					<div class="title-child">
+						<div>—— 熹萌工业平台 ——</div>
+					</div>
+					<div class="imgs-parent">
+						<div class="imgs">
+							<img src="img/item/ximeng/1.jpg"/>
+							<img src="img/item/ximeng/2.jpg"/>
+							<img src="img/item/ximeng/3.jpg"/>
+							<img src="img/item/ximeng/4.jpg"/>
+							<img src="img/item/ximeng/5.jpg"/>
+						</div>
+					</div>
+					<div class="content">
+						<div><span>简介：</span>供应链平台，目前暂时为Demo版。</div>
+						<div><span>职责：</span>前端H5项目搭建、研发、接口对接。</div>
+						<div><span>状态：</span>已上线。</div>
+						<div><span>查看方式：</span><a href="http://xm.joypay.cn/" target="_blank">xm.joypay.cn</a></div>
+					</div>
+				</div>
+				<!-- 报工H5 -->
+				<div class="slide">
+					<div class="title">
+						<i class="page-left"></i>
+						<div>往期项目展示（3/7）</div>
+						<i class="page-right"></i>
+					</div>
+					<div class="title-child">
+						<div>—— 报工微信H5 ——</div>
+					</div>
+					<div class="imgs-parent">
+						<div class="imgs">
+							<img src="img/item/report_h5/1.jpg"/>
+							<img src="img/item/report_h5/2.jpg"/>
+							<img src="img/item/report_h5/3.jpg"/>
+							<img src="img/item/report_h5/4.jpg"/>
+							<img src="img/item/report_h5/5.jpg"/>
+							<img src="img/item/report_h5/6.jpg"/>
+							<img src="img/item/report_h5/7.jpg"/>
+							<img src="img/item/report_h5/8.jpg"/>
+							<img src="img/item/report_h5/9.jpg"/>
+							<img src="img/item/report_h5/10.jpg"/>
+							<img src="img/item/report_h5/11.jpg"/>
+						</div>
+					</div>
+					<div class="content">
+						<div><span>简介：</span>公司内部报工系统，可填写日报、内勤管理、项目管理、信息流转等。</div>
+						<div><span>职责：</span>前端H5搭建与研发，后端接口研发。</div>
+						<div><span>状态：</span>已上线，内部使用。</div>
+						<div><span>查看方式：</span>关注公众号“威智荟”->内部协同->报工。</div>
+					</div>
+				</div>
+				<!-- 报工管理端 -->
+				<div class="slide">
+					<div class="title">
+						<i class="page-left"></i>
+						<div>往期项目展示（4/7）</div>
+						<i class="page-right"></i>
+					</div>
+					<div class="title-child">
+						<div>—— 报工管理端 ——</div>
+					</div>
+					<div class="imgs-parent">
+						<div class="imgs">
+							<img src="img/item/report_center/1.jpg"/>
+							<img src="img/item/report_center/2.jpg"/>
+							<img src="img/item/report_center/3.jpg"/>
+							<img src="img/item/report_center/4.jpg"/>
+							<img src="img/item/report_center/5.jpg"/>
+							<img src="img/item/report_center/6.jpg"/>
+							<img src="img/item/report_center/7.jpg"/>
+						</div>
+					</div>
+					<div class="content">
+						<div><span>简介：</span>公司内部报工系统管理端，主要用于管理和配置。</div>
+						<div><span>职责：</span>后端项目搭建与研发，后端组件搭建与研发。</div>
+						<div><span>状态：</span>内部上线，内网访问。</div>
+					</div>
+				</div>
+				<!-- 看板 -->
+				<div class="slide">
+					<div class="title">
+						<i class="page-left"></i>
+						<div>往期项目展示（5/7）</div>
+						<i class="page-right"></i>
+					</div>
+					<div class="title-child">
+						<div>—— 看板系统 ——</div>
+					</div>
+					<div class="imgs-parent">
+						<div class="imgs">
+							<img src="img/item/screen/1.jpg"/>
+							<img src="img/item/screen/2.jpg"/>
+							<img src="img/item/screen/3.jpg"/>
+							<img src="img/item/screen/4.jpg"/>
+							<img src="img/item/screen/5.jpg"/>
+							<img src="img/item/screen/6.jpg"/>
+							<img src="img/item/screen/7.jpg"/>
+						</div>
+					</div>
+					<div class="content">
+						<div><span>简介：</span>项目展示平台，同时可单点操控公司多台电视，展示不同内容。</div>
+						<div><span>职责：</span>项目前端搭建、研发，后端搭建、研发，组件搭建、研发。</div>
+						<div><span>状态：</span>内部上线，内网访问。</div>
+					</div>
+				</div>
+				<!-- 智慧云官网 -->
+				<div class="slide">
+					<div class="title">
+						<i class="page-left"></i>
+						<div>往期项目展示（6/7）</div>
+						<i class="page-right"></i>
+					</div>
+					<div class="title-child">
+						<div>—— 智慧云官网 ——</div>
+					</div>
+					<div class="imgs-parent">
+						<div class="imgs">
+							<img src="img/item/protal/1.jpg"/>
+							<img src="img/item/protal/2.jpg"/>
+							<img src="img/item/protal/3.jpg"/>
+							<img src="img/item/protal/4.jpg"/>
+							<img src="img/item/protal/5.jpg"/>
+						</div>
+					</div>
+					<div class="content">
+						<div><span>简介：</span>公司门户展示平台。</div>
+						<div><span>职责：</span>项目前端H5搭建、研发（项目无后端）。</div>
+						<div><span>状态：</span>未上线。</div>
+					</div>
+				</div>
+				<!-- 智慧云中台 -->
+				<div class="slide">
+					<div class="title">
+						<i class="page-left"></i>
+						<div>往期项目展示（7/7）</div>
+						<i class="page-right"></i>
+					</div>
+					<div class="title-child">
+						<div>—— 智慧云中台 ——</div>
+					</div>
+					<div class="imgs-parent">
+						<div class="imgs">
+							<img src="img/item/zhihuicloud/1.jpg"/>
+							<img src="img/item/zhihuicloud/2.jpg"/>
+							<img src="img/item/zhihuicloud/3.jpg"/>
+							<img src="img/item/zhihuicloud/4.jpg"/>
+							<img src="img/item/zhihuicloud/5.jpg"/>
+							<img src="img/item/zhihuicloud/6.jpg"/>
+						</div>
+					</div>
+					<div class="content">
+						<div><span>简介：</span>公司中台业务，涵盖云ERP、OA、SRC、CRM、智能秘书、自定义报表、看板。</div>
+						<div><span>职责：</span>项目搭建、研发、组件研发。</div>
+						<div><span>状态：</span>已上线。</div>
+						<div><span>查看方式：</span><a href="http://219.139.194.26/" target="_blank">http://219.139.194.26/</a></div>
+					</div>
 				</div>
 			</div>
 		  </div>
