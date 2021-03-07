@@ -72,10 +72,22 @@ var apiProxy = {
 					}
 				},
 				error: function(xhr,textStatus,errorThrown) {
-			   　　if (xhr.status == 401) {
-			   　　　　 collback(xhr.responseJSON);
-				 　}
-			　　}
+					if (xhr.status == 401) {
+						collback(xhr.responseJSON);
+					} else {
+						if(!xhr.responseJSON) {
+							layer.closeAll();
+							layer.open({
+								content: '服务器异常',
+								btn: '确定'
+							});
+						} else {
+							if(!!collback) {
+								collback(xhr.responseJSON);
+							}
+						}
+					}
+				}
 			});
 		}
 	},

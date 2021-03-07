@@ -387,7 +387,7 @@ function page24Charts() {
 function login() {
 	var account = $("#account").val();
 	var password = $("#password").val();
-	var index = layer.open({type: 2});
+	var index = layer.open({type: 2, shadeClose: false});
 	apiProxy.apis.user.login(account, password, function(data) {
 		layer.close(index);
 		if(apiProxy.utils.isSuccess(data)) {
@@ -413,7 +413,7 @@ function register() {
 	var account = $("#account").val();
 	var password = $("#password").val();
 	var nickname = $("#nickname").val();
-	var index = layer.open({type: 2});
+	var index = layer.open({type: 2, shadeClose: false});
 	apiProxy.apis.user.register(account, password, nickname, function(data) {
 		layer.close(index);
 		if(apiProxy.utils.isSuccess(data)) {
@@ -470,7 +470,7 @@ function queryBookList(page) {
 		}
 	}
 	
-	var index = layer.open({type: 2});
+	var index = layer.open({type: 2, shadeClose: false});
 	var bookName = $("#queryBookName").val();
 	var row = queryBookRows;
 	apiProxy.apis.manager.queryBookList(bookName, page, queryBookRows, function(data) {
@@ -520,7 +520,7 @@ function showAddBook() {
 		btn: ['保存', '取消'],
 		yes: function() {
 			var bookName = $("#addBookName").val();
-			var index = layer.open({type: 2});
+			var index = layer.open({type: 2, shadeClose: false});
 			apiProxy.apis.manager.saveBook(bookName, function(data) {
 				if(apiProxy.utils.isSuccess(data)) {
 					layer.open({
@@ -545,7 +545,7 @@ function showAddBook() {
 //修改图书
 function showUpdateBook(id) {
 	//查询图书
-	var queryIndex = layer.open({type: 2});
+	var queryIndex = layer.open({type: 2, shadeClose: false});
 	apiProxy.apis.manager.queryBook(id, function(book) {
 		layer.close(queryIndex);
 		if(apiProxy.utils.isSuccess(book)) {
@@ -558,7 +558,7 @@ function showUpdateBook(id) {
 				btn: ['更新', '取消'],
 				yes: function() {
 					var bookName = $("#updateBookName").val();
-					var index = layer.open({type: 2});
+					var index = layer.open({type: 2, shadeClose: false});
 					apiProxy.apis.manager.updateBook(id, bookName, function(data) {
 						if(apiProxy.utils.isSuccess(data)) {
 							layer.open({
@@ -593,7 +593,7 @@ function deleteBook(id, name) {
 		content: '确定要删除['+name+']吗？',
 		btn: ["确定", "取消"],
 		yes: function() {
-			var index = layer.open({type: 2});
+			var index = layer.open({type: 2, shadeClose: false});
 			apiProxy.apis.manager.deleteBook(id, function(data) {
 				if(apiProxy.utils.isSuccess(data)) {
 					layer.open({
@@ -619,7 +619,7 @@ function deleteBook(id, name) {
 function showBookBorrow(bookId) {
 	var page = 1;
 	var rows = 1000; //默认加载最大条数
-	var index = layer.open({type: 2});
+	var index = layer.open({type: 2, shadeClose: false});
 	apiProxy.apis.manager.queryBookBorrowList(bookId, page, rows, function(data) {
 		if(apiProxy.utils.isSuccess(data)) {
 			//展示
@@ -685,7 +685,7 @@ function applyRandomBorrow() {
 	num = parseInt(num);
 	//调用接口
 	$("#getMsg").html("");
-	var index = layer.open({type: 2});
+	var index = layer.open({type: 2, shadeClose: false});
 	apiProxy.apis.apply.randomBorrow(num, cut, function(data) {
 		if(apiProxy.utils.isSuccess(data)) {
 			data = data.data;
@@ -705,7 +705,7 @@ function applyRandomBorrow() {
 function applyRandomReturn() {
 	//调用接口
 	$("#putMsg").html("");
-	var index = layer.open({type: 2});
+	var index = layer.open({type: 2, shadeClose: false});
 	apiProxy.apis.apply.randomReturn(function(data) {
 		if(apiProxy.utils.isSuccess(data)) {
 			data = data.data;
